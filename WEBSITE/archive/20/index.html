@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaTool Project Grid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+    <div class="left-container">
+        <div class="left-heading">
+            <h1>Gaze Tracker</h1>
+            <h2 style="font-size: 0.8em;">Mapping and Shaping Attention during ODYSSEY</h2>
+        </div>
+        <div class="top-left-tabs">
+            <button id="about-tab">About</button>
+            <button id="set-default-tab">Set Default</button>
+            <button id="gaze-tracker-tab">Gaze Tracker</button>
+        </div>
+        <div id="about-container" class="tab-content">
+            <div id="content-panel">
+                <p><strong>Description:</strong> Gaze Tracker is a device that tracks and maps gaze directions while commuting. By analyzing head position and mapping it to a 3x3 visual grid, it helps users identify gaze patterns. The device provides real-time feedback to encourage users to engage more attentively with their surroundings.</p>
+                <p><strong>Attentional Theory - Attentional Disconnection in the Modern Age:</strong><br>
+                In the past, before screens dominated our lives, commutes encouraged observation and exploration. Gaze patterns were varied, directed outward toward the environment rather than downward. Over time, the rise of devices has reshaped muscle memory and attentional habits, resulting in a predominant downward gaze. This project seeks to undo these patterns, reteaching attention as a deliberate and interactive practice.</p>
+                <p><strong>Attention as a Fluid Process:</strong><br>
+                Attention is a fluid and deeply habitual process, often flowing unconsciously and shaped by environments, tasks, and internal states. This project explores the interaction between people, urban spaces, and technology, focusing on how screens affect bodily and mental engagement with the world. Technology has reshaped individual behavior during commutes, often leading to disconnection from surroundings and a shift in attentional habits.</p>
+                <p><strong>Intervening with GazeTracker:</strong><br>
+                GazeTracker intervenes in this unconscious habit by creating a feedback loop that encourages intentional focus. By tracking gaze patterns on a 3x3 grid and logging time spent in different zones, it highlights habitual downward gazing and its impact. The device provides real-time feedback to redirect attention, prompting engagement with surroundings.</p>
+                <p><strong>Attention as a Trainable and Moldable Process:</strong><br>
+                Attention is imagined as both a muscle and clay—trainable through exercise and moldable through repeated awareness. Each notification serves as a reminder to look up, actively reshaping my relationship with the environment. Through this feedback system, GazeTracker fosters a playful yet disciplined approach to attention, blending technology and urban spaces into a partnership for cultivating spatial awareness and curiosity.</p>
+                <p><strong>Reawakening Curiosity and Connection:</strong><br>
+                This project envisions attention as a dynamic and trainable process, where deliberate interventions can reawaken curiosity and connection to the world.</p>
+                <div class="evolution-images">
+                    <img src="images/evolution-1.png" alt="Evolution 1" class="evolution-image" style="border: none; max-height: 100%;">
+                    <img src="images/evolution-2.png" alt="Evolution 2" class="evolution-image" style="border: none; max-height: 100%;">
+                    <img src="images/evolution-3.png" alt="Evolution 3" class="evolution-image" style="border: none; max-height: 100%;">
+                    <img src="images/evolution-4.png" alt="Evolution 4" class="evolution-image" style="border: none; max-height: 100%;">
+                    <img src="images/evolution-5.png" alt="Evolution 5" class="evolution-image" style="border: none; max-height: 100%;">
+                    <img src="images/evolution-6.png" alt="Evolution 6" class="evolution-image" style="border: none; max-height: 100%;">
+                    <img src="images/evolution-7.png" alt="Evolution 7" class="evolution-image" style="border: none; max-height: 100%;">
+                    <img src="images/evolution-8.png" alt="Evolution 8" class="evolution-image" style="border: none; max-height: 100%;">
+                </div>
+            </div>
+        </div>
+        
+        <div id="gaze-tracker-container" class="tab-content" style="display: none;">
+            <div id="live-data-container" class="live-data-container">
+                <h2>Live Gyroscope Data</h2>
+                <p>Waiting for data...</p>
+            </div>
+            <div id="gaze-pattern-container" class="gaze-pattern-container">
+                <h2>Gaze Pattern</h2>
+                <p>Waiting for gaze pattern...</p>
+            </div>
+            <div class="button-container" id="gaze-tracker-buttons">
+                <button id="start-button">Start Tracking</button>
+                <button id="reset-button">Reset Tracking</button>
+            </div>
+        </div>
+
+        <div id="set-default-container" class="tab-content" style="display: none;">
+            <div id="set-default-content">
+                <div class="set-default-left">
+                    <p><strong>Instructions:</strong></p>
+                    <p>Before we get started with the gaze tracking, let's understand your gaze pattern angles for each gaze. Follow these steps:</p>
+                    <ol>
+                        <li>Wear the headband in a comfortable position. Adjust the tight or loose adjustments as needed.</li>
+                        <li>Start with the middle center gaze pattern angle. Face in that direction and then click on the 'Record' button when ready to set your default angle for the respective gaze pattern.</li>
+                        <li>Repeat this for the middle center gaze and then similarly do it for all gaze patterns so you set it for all 9 gaze patterns.</li>
+                        <li>Make sure you have recorded the angles with you in your natural gaze positions. Repeat if necessary until you are satisfied.</li>
+                        <li>Press the 'Start Gaze Tracking' button below to begin.</li>
+                        <li>Start doing an activity where you would like to understand your gaze pattern.</li>
+                    </ol>
+                    <div class="button-container" id="set-default-buttons">
+                        <button id="reset-all-button">Reset All</button>
+                        <button id="start-gaze-tracking-button">Start Gaze Tracking</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="right-half">
+        <div class="grid-container">
+            <div class="grid-item" data-gaze="top-left">
+                <div class="label">TOP LEFT</div>
+                <img src="images/TOP LEFT.png" alt="Top Left" style="border: none;">
+                <div class="record-button" style="display: none;">Record</div>
+                <div class="count-rect">Count: 0</div>
+                <div class="time-rect">Time: 0s</div>
+            </div>
+            <div class="grid-item" data-gaze="top-center">
+                <div class="label">TOP CENTER</div>
+                <img src="images/TOP CENTER.png" alt="Top Center" style="border: none;">
+                <div class="record-button" style="display: none;">Record</div>
+                <div class="count-rect">Count: 0</div>
+                <div class="time-rect">Time: 0s</div>
+            </div>
+            <div class="grid-item" data-gaze="top-right">
+                <div class="label">TOP RIGHT</div>
+                <img src="images/TOP RIGHT.png" alt="Top Right" style="border: none;">
+                <div class="record-button" style="display: none;">Record</div>
+                <div class="count-rect">Count: 0</div>
+                <div class="time-rect">Time: 0s</div>
+            </div>
+            <div class="grid-item" data-gaze="middle-left">
+                <div class="label">MIDDLE LEFT</div>
+                <img src="images/MIDDLE LEFT.png" alt="Middle Left" style="border: none;">
+                <div class="record-button" style="display: none;">Record</div>
+                <div class="count-rect">Count: 0</div>
+                <div class="time-rect">Time: 0s</div>
+            </div>
+            <div class="grid-item" data-gaze="middle-center">
+                <div class="label">MIDDLE CENTER</div>
+                <img src="images/MIDDLE CENTER.png" alt="Middle Center" style="border: none;">
+                <div class="record-button" style="display: none;">Record</div>
+                <div class="count-rect">Count: 0</div>
+                <div class="time-rect">Time: 0s</div>
+            </div>
+            <div class="grid-item" data-gaze="middle-right">
+                <div class="label">MIDDLE RIGHT</div>
+                <img src="images/MIDDLE RIGHT.png" alt="Middle Right" style="border: none;">
+                <div class="record-button" style="display: none;">Record</div>
+                <div class="count-rect">Count: 0</div>
+                <div class="time-rect">Time: 0s</div>
+            </div>
+            <div class="grid-item" data-gaze="bottom-left">
+                <div class="label">BOTTOM LEFT</div>
+                <img src="images/BOTTOM LEFT.png" alt="Bottom Left" style="border: none;">
+                <div class="record-button" style="display: none;">Record</div>
+                <div class="count-rect">Count: 0</div>
+                <div class="time-rect">Time: 0s</div>
+            </div>
+            <div class="grid-item" data-gaze="bottom-center">
+                <div class="label">BOTTOM CENTER</div>
+                <img src="images/BOTTOM CENTER.png" alt="Bottom Center" style="border: none;">
+                <div class="record-button" style="display: none;">Record</div>
+                <div class="count-rect">Count: 0</div>
+                <div class="time-rect">Time: 0s</div>
+            </div>
+            <div class="grid-item" data-gaze="bottom-right">
+                <div class="label">BOTTOM RIGHT</div>
+                <img src="images/BOTTOM RIGHT.png" alt="Bottom Right" style="border: none;">
+                <div class="record-button" style="display: none;">Record</div>
+                <div class="count-rect">Count: 0</div>
+                <div class="time-rect">Time: 0s</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js" defer></script>
+</body>
+</html>

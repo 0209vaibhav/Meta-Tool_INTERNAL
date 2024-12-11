@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="set-default-container" class="tab-content" style="display: none;">
             <div class="instructions-buttons">
                 <button id="step-1">Step 1</button>
@@ -59,7 +59,7 @@
                 <button id="step-9">Step 9</button>
                 <button id="step-10">Step 10</button>
             </div>
-
+        
             <div class="instruction-box" id="instruction-box">
                 <h3 style="font-size: 1.5em; font-weight: bold;">Refined Steps for Gaze Tracking</h3>
                 <h4 style="font-size: 1.2em; font-weight: bold;">Step 1: <strong>Wear the Headband</strong></h4>
@@ -83,43 +83,41 @@
                 <h4 style="font-size: 1.2em; font-weight: bold;">Step 10: <strong>Explore Visualizations</strong></h4>
                 <p>To better understand how your gaze patterns relate to specific activities, review the accompanying visualizations.</p>
             </div>
+        
+            <!-- Buttons moved to the bottom -->
+            <div class="button-container" id="set-default-buttons">
+                <button id="reset-all-button">Reset All</button>
+                <button id="start-gaze-tracking-button">Start Gaze Tracking</button>
+            </div>
         </div>
-
-        <div id="set-default-buttons" class="tab-buttons" style="display: none;">
-            <button id="reset-all-button" class="tab-button">Reset All</button>
-            <button id="start-gaze-tracking-button" class="tab-button">Start Gaze Tracking</button>
-        </div>
+        
 
         <div id="gaze-tracker-container" class="tab-content" style="display: none;">
-            <div class="gaze-tracker-layout">
-                <div id="live-data-container" class="live-data-container">
-                    <h2>Live Gyroscope Data</h2>
-                    <p>Waiting for data...</p>
-                </div>
-                
-                <div id="gaze-pattern-container" class="gaze-pattern-container">
-                    <h2>Gaze Pattern</h2>
-                    <p>Waiting for gaze pattern...</p>
-                </div>
+            <div id="live-data-container" class="live-data-container">
+                <h2>Live Gyroscope Data</h2>
+                <p>Waiting for data...</p>
             </div>
-
-            <div class="visualization-container">
+            <div id="gaze-pattern-container" class="gaze-pattern-container">
+                <h2>Gaze Pattern</h2>
+                <p>Waiting for gaze pattern...</p>
+            </div>
+            
+            <!-- New Visualization Section -->
+            <div id="visualization-container" class="visualization-container">
                 <h2>Current Gaze Tracking</h2>
                 <p id="current-gaze-pattern">Gaze Pattern: N/A</p>
                 <p id="current-count">Count: 0</p>
                 <p id="current-time">Time: 0s</p>
-                <div class="bar-graph" id="bar-graph">
-                    <!-- Bar graph will be rendered here -->
-                </div>
+            </div>
+            
+            <div class="spacer"></div>
+            <div class="button-container" id="gaze-tracker-buttons">
+                <button id="start-button">Start Tracking</button>
+                <button id="reset-button">Reset Tracking</button>
             </div>
         </div>
-
-        <div id="gaze-tracker-buttons" class="tab-buttons" style="display: none;">
-            <button id="start-button" class="tab-button">Start Tracking</button>
-            <button id="reset-button" class="tab-button">Reset Tracking</button>
-        </div>
     </div>
-
+    
     <div class="right-half">
         <div class="grid-container">
             <div class="grid-item" data-gaze="top-left">

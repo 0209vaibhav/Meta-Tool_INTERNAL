@@ -63,6 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2>Gaze Pattern</h2>
                     <p>${gazePattern}</p>
                 `;
+
+                // Update the visualization display
+                document.getElementById('count-display').textContent = countValue; // Update count
+                document.getElementById('time-display').textContent = `${elapsedTime}s`; // Update time
+                document.getElementById('gaze-pattern-display').textContent = gazePattern; // Update gaze pattern
             } else {
                 liveDataContainer.innerHTML = `<p>Unexpected data format received from Firebase. Please verify the data structure in the database.</p>`;
                 gazePatternContainer.innerHTML = `<p>Unable to determine gaze pattern due to incorrect data format.</p>`;

@@ -164,10 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const countRect = item.querySelector('.count-rect');
             const timeRect = item.querySelector('.time-rect');
 
-            // Hide Start Tracking and Reset Tracking buttons in About and Set Default tabs
             if (tab === 'about' || tab === 'setDefault') {
-                startTrackingButton.style.display = 'none'; // Hide Start Tracking button
-                resetTrackingButton.style.display = 'none'; // Hide Reset Tracking button
                 if (recordButton) recordButton.style.display = tab === 'setDefault' ? 'block' : 'none';
                 if (countRect) countRect.style.display = 'none';
                 if (timeRect) timeRect.style.display = 'none';
@@ -179,8 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     timers[gridKey].interval = null;
                 }
             } else if (tab === 'gazeTracker') {
-                startTrackingButton.style.display = 'block'; // Show Start Tracking button
-                resetTrackingButton.style.display = 'block'; // Show Reset Tracking button
                 if (recordButton) recordButton.style.display = 'none';
                 if (countRect) countRect.style.display = 'block';
                 if (timeRect) timeRect.style.display = 'block';
@@ -395,32 +390,5 @@ document.addEventListener('DOMContentLoaded', () => {
             instructionBox.innerHTML = `<p>${instructions[`step${step}`]}</p>`;
         });
     });
-
-    // Function to render the bar graph
-    function renderBarGraph() {
-        const barGraph = document.getElementById('bar-graph');
-        barGraph.innerHTML = ''; // Clear previous graph
-
-        const gazePatterns = ['TOP LEFT', 'TOP CENTER', 'TOP RIGHT', 'MIDDLE LEFT', 'MIDDLE CENTER', 'MIDDLE RIGHT', 'BOTTOM LEFT', 'BOTTOM CENTER', 'BOTTOM RIGHT'];
-        const maxCount = Math.max(...Object.values(counts), 1); // Get the maximum count for scaling
-
-        gazePatterns.forEach(pattern => {
-            const count = counts[pattern.toLowerCase().replace(/ /g, '-')] || 0; // Get the count for the pattern
-            const bar = document.createElement('div');
-            bar.style.width = `${(count / maxCount) * 100}%`; // Scale the width based on the count
-            bar.style.height = '20px'; // Height of the bar
-            bar.style.backgroundColor = 'green'; // Color of the bar
-            bar.style.margin = '5px 0'; // Space between bars
-            bar.style.borderRadius = '5px'; // Rounded corners
-            bar.textContent = `${pattern}: ${count}`; // Display the pattern and count
-            bar.style.color = 'white'; // Text color
-            bar.style.textAlign = 'right'; // Align text to the right
-            bar.style.paddingRight = '5px'; // Space between text and right edge
-            barGraph.appendChild(bar);
-        });
-    }
-
-    // Call renderBarGraph whenever counts are updated
-    // For example, you can call it in the gyroDataRef.on('value', ...) function after updating counts
 });
 

@@ -164,10 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const countRect = item.querySelector('.count-rect');
             const timeRect = item.querySelector('.time-rect');
 
-            // Hide Start Tracking and Reset Tracking buttons in About and Set Default tabs
             if (tab === 'about' || tab === 'setDefault') {
-                startTrackingButton.style.display = 'none'; // Hide Start Tracking button
-                resetTrackingButton.style.display = 'none'; // Hide Reset Tracking button
                 if (recordButton) recordButton.style.display = tab === 'setDefault' ? 'block' : 'none';
                 if (countRect) countRect.style.display = 'none';
                 if (timeRect) timeRect.style.display = 'none';
@@ -179,8 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     timers[gridKey].interval = null;
                 }
             } else if (tab === 'gazeTracker') {
-                startTrackingButton.style.display = 'block'; // Show Start Tracking button
-                resetTrackingButton.style.display = 'block'; // Show Reset Tracking button
                 if (recordButton) recordButton.style.display = 'none';
                 if (countRect) countRect.style.display = 'block';
                 if (timeRect) timeRect.style.display = 'block';
